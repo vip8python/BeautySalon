@@ -1,10 +1,11 @@
 from django.db import models
+from django.urls import reverse
 
 
 class User(models.Model):
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
-    logo = models.ImageField(null=True)
+    logo = models.ImageField(null=True, blank=True)
     phone_number = models.CharField(max_length=20)
     register = models.DateField()
     email = models.CharField(max_length=50)
@@ -49,6 +50,7 @@ class SpecialistServices(models.Model):
 
     class Meta:
         verbose_name_plural = 'specialist services'
+
 
 
 class Registration(models.Model):
