@@ -10,9 +10,11 @@ class User(models.Model):
     register = models.DateField()
     email = models.CharField(max_length=50)
 
-
     def __str__(self):
         return f'{self.first_name} {self.last_name}'
+
+    def get_absolute_url(self):
+        return reverse('user-detail', args=[str(self.id)])
 
 
 class Specialist(models.Model):
@@ -28,6 +30,9 @@ class Specialist(models.Model):
     def __str__(self):
         return f'{self.company}'
 
+    def get_absolute_url(self):
+        return reverse('specialist-detail', args=[str(self.id)])
+
 
 class Services(models.Model):
     service_name = models.CharField(max_length=50)
@@ -37,22 +42,30 @@ class Services(models.Model):
 
     class Meta:
         verbose_name_plural = 'services'
+
     def __str__(self):
         return f'{self.service_name}'
 
 
 class SpecialistServices(models.Model):
-    specialist = models.ForeignKey('Specialist', on_delete=models.CASCADE, null=True, blank=True)
-    service = models.ForeignKey('Services', on_delete=models.CASCADE, null=True, blank=True)
+    specialist = models.ForeignKey('Specialist', on_delete=models.SET_NULL, null=True, blank=True)
+    service = models.ForeignKey('Services', on_delete=models.SET_NULL, null=True, blank=True)
 
     class Meta:
         verbose_name_plural = 'specialist services'
 
+    def __str__(self):
+        return f'{self.specialist} - {self.service}'
 
 
 class Registration(models.Model):
     date = models.DateTimeField()
-    user = models.ForeignKey('User', on_delete=models.CASCADE, null=True, blank=True)
-    specialist = models.ForeignKey('Specialist', on_delete=models.CASCADE, null=True, blank=True)
+    user = models.ForeignKey('User', on_delete=models.SET_NULL, null=True, blank=True)
+    specialist = models.ForeignKey('Specialist', on_delete=models.SET_NULL, null=True, blank=True)
 
-    # specialist_specialist = models.ForeignKey('Specialist', on_delete=models.CASCADE)
+    class Meta:
+        ordering = ['date']
+
+    def __str__(self):
+        return f'{self.date} : {self.user} - {self.specialist}'
+#       return f'({self.date} {self.user.first_name})'

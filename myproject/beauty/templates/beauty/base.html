@@ -1,36 +1,6 @@
 <!DOCTYPE html>
-{% load static%}
-<style>
-    body {
-    padding: 0;
-    list-style: none;
-     background-image: url("{% static 'beauty/images/beauty1.jpg' %}");
-     background-size: cover;
-     min-height: 100vh;
-    color: #fff;
-    }
-
-
-</style>
-<div class="container-fluid">
-    <nav class="navbar navbar-expand-lg navbar-light ">
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item">
-                <a class="navbar-brand" href="{% url 'base' %}">
-                    <img src="{% static 'beauty/images/logo.jpg' %}" alt='Start page' width="75" , height="75">
-                </a>
-            <li class="nav-item"><a class="nav-link" href="#">Registruotis</a></li>
-            <li class="nav-item"><a class="nav-link" href="#">Prisijungti</a></li>
-            <li class="nav-item"><a class="nav-link" href="#">Atsijungti</a></li>
-
-
-        </ul>
-    </nav>
-</div>
+{% load static %}
 <html lang="en">
-<li class="logo"><a href="#">
-    <div class="logo"></div>
-</a></li>
 <head>
     <meta charset="UTF-8">
     <title>{{ title }}</title>
@@ -40,16 +10,60 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N"
             crossorigin="anonymous"></script>
-
-
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <style>
+        body {
+            padding: 0;
+            list-style: none;
+            background-image: url("{% static 'beauty/images/beauty1.jpg' %}");
+            background-size: cover;
+            min-height: 100vh;
+            color: #fff;
+        }
+    </style>
 </head>
-<li class="nav-item active"><a class="nav-link" href="#">Paslaugos</a></li>
-<li class="nav-item active"><a class="nav-link" href="#">Užsakymai</a></li>
-<li class="nav-item"><a class="nav-link" href="#">Atsiliepimai</a></li>
-<li class="nav-item"><a class="nav-link" href="#">Kalendorius</a></li>
+
+<div class="container-fluid">
+    <nav class="navbar navbar-expand-lg navbar-light ">
+        {% block sidebar %}
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="navbar-brand" href="{% url 'base' %}">
+                    <img src="{% static 'beauty/images/logo.jpg' %}" alt='Start page' width="75" , height="75">
+                </a>
+            </li>
+                {% if user.is_authenticated %}
+            <li class="nav-item"><a class="nav-link" href="#">
+              </svg>
+            {{ user.get_username }}</a></li>
+              <li class="nav-item active"><a class="nav-link" href="{% url 'logout'%}">Atsijungti</a></li>
+          {% else %}
+            <li class="nav-item active"><a class="nav-link" href="{% url 'login'%}">Prisijungti</a></li>
+
+          {% endif %}
+
+        </ul>
+        {% endblock %}
+    </nav>
+</div>
+<ul style="list-style-type:circle">
+    <li class="nav-item active"><a class="nav-link" href="{% url 'services' %}">Paslaugos</a></li>
+    <li class="nav-item active"><a class="nav-link" href="{% url 'specialist' %}">Salonai</a></li>
+    <li class="nav-item active"><a class="nav-link" href="#">Mano uzsakymai</a></li>
+    <li class="nav-item active"><a class="nav-link" href="#">Kalendorius</a></li>
+</ul>
+
+<style>
+    li {
+        color: green;
+    }
+</style>
 
 <body>
+<div>
 {% block content %}
-{% endblock%}
+{% endblock %}
+</div>
 </body>
 </html>
+

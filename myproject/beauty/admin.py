@@ -15,7 +15,7 @@ class ServicesAdmin(admin.ModelAdmin):
     search_fields = ('service_name',)
 
 class RegistrationAdmin(admin.ModelAdmin):
-    list_display = ('data',)
+    list_display = ('data', )
 
 
 

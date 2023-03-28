@@ -1,0 +1,10 @@
+{% extends "beauty/base.html" %}
+
+{% block content %}
+<strong style="color: black;">Paslaugos:</strong>
+{% for s in services %}
+  <ul>
+     <li> {{ s.service_name }}</li>
+  </ul>
+{% endfor %}
+{% endblock %}

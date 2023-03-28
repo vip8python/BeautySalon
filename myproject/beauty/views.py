@@ -1,5 +1,6 @@
 from django.http import HttpResponse
 from django.shortcuts import render
+from .models import *
 
 
 def base(request):
@@ -7,7 +8,8 @@ def base(request):
 
 
 def services(request):
-    pass
+    sevices_list = Services.objects.all()
+    return render(request, 'beauty/services.html', {'services': sevices_list})
 
 
 def user(request):
@@ -15,7 +17,8 @@ def user(request):
 
 
 def specialist(request):
-    pass
+    specialist_list = Specialist.objects.all()
+    return render(request, 'beauty/specialist.html', {'specialist': specialist_list})
 
 def registration(request):
     pass
