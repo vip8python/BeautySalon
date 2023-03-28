@@ -16,3 +16,6 @@ def user(request):
 
 def specialist(request):
     pass
+
+def registration(request):
+    pass

@@ -9,14 +9,13 @@ class User(models.Model):
     phone_number = models.CharField(max_length=20)
     register = models.DateField()
     email = models.CharField(max_length=50)
-    registration_user = models.ForeignKey('Registration', on_delete=models.CASCADE, null=True, blank=True, related_name='user_list')
+
 
     def __str__(self):
         return f'{self.first_name} {self.last_name}'
 
 
 class Specialist(models.Model):
-    registration_id = models.ForeignKey('Registration', on_delete=models.CASCADE, null=True, blank=True, related_name='specialist_list')
     company = models.CharField(max_length=50)
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
@@ -24,8 +23,7 @@ class Specialist(models.Model):
     calendar = models.DateTimeField()
     address = models.CharField(max_length=100)
     register = models.DateField()
-    photo = models.ImageField(null=True)
-    registration_specialist = models.ForeignKey('Registration', on_delete=models.CASCADE, null=True, blank=True, related_name='specialist')
+    photo = models.ImageField(null=True, blank=True)
 
     def __str__(self):
         return f'{self.company}'
@@ -36,7 +34,6 @@ class Services(models.Model):
     time = models.PositiveIntegerField(default=15)
     price = models.PositiveIntegerField(default=0)
     photo = models.ImageField(null=True, blank=True)
-    specialist_services = models.ForeignKey('SpecialistServices', on_delete=models.CASCADE, null=True, blank=True, related_name='services')
 
     class Meta:
         verbose_name_plural = 'services'
@@ -45,8 +42,8 @@ class Services(models.Model):
 
 
 class SpecialistServices(models.Model):
-    specialist = models.ForeignKey('Specialist', on_delete=models.CASCADE)
-    service = models.ForeignKey('Services', on_delete=models.CASCADE)
+    specialist = models.ForeignKey('Specialist', on_delete=models.CASCADE, null=True, blank=True)
+    service = models.ForeignKey('Services', on_delete=models.CASCADE, null=True, blank=True)
 
     class Meta:
         verbose_name_plural = 'specialist services'
@@ -55,5 +52,7 @@ class SpecialistServices(models.Model):
 
 class Registration(models.Model):
     date = models.DateTimeField()
-    user = models.ForeignKey('User', on_delete=models.CASCADE)
-    specialist_specialist = models.ForeignKey('Specialist', on_delete=models.CASCADE)
+    user = models.ForeignKey('User', on_delete=models.CASCADE, null=True, blank=True)
+    specialist = models.ForeignKey('Specialist', on_delete=models.CASCADE, null=True, blank=True)
+
+    # specialist_specialist = models.ForeignKey('Specialist', on_delete=models.CASCADE)
