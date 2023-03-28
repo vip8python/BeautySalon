@@ -18,7 +18,7 @@
             background-image: url("{% static 'beauty/images/beauty1.jpg' %}");
             background-size: cover;
             min-height: 100vh;
-            color: #fff;
+            color: #000;
         }
     </style>
 </head>
@@ -32,6 +32,11 @@
                     <img src="{% static 'beauty/images/logo.jpg' %}" alt='Start page' width="75" , height="75">
                 </a>
             </li>
+            <li>
+    <form action="{% url 'search' %}" method="get" class="form-inline my-2 my-md-0">
+    <input name="query" class="form-control" type="text" placeholder="Paieška">
+    </form>
+</li>
                 {% if user.is_authenticated %}
             <li class="nav-item"><a class="nav-link" href="#">
               </svg>

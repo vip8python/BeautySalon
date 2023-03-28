@@ -1,0 +1,18 @@
+{% extends "beauty/base.html" %}
+
+{% block content %}
+  <h1>Paieškos pagal "{{query}}" rezultatai:</h1>
+  </br>
+  {% if specialist %}
+  <ul>
+    {% for s in specialist %}
+      <li>
+        <a href="{{ specialist.id }}">{{ s.company }}</a> ({{s.address}})
+      </li>
+    {% endfor %}
+  </ul>
+  {% else %}
+    <p>Oops. Nieko neradome :(</p>
+  {% endif %}
+
+  {% endblock %}

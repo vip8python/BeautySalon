@@ -136,5 +136,9 @@ EMAIL_HOST_USER = 'beauty@gmail.com'
 # el. pašto adresas iš kurio siųsite
 EMAIL_HOST_PASSWORD = 'VerySecret'
 # slaptažodis
+# media folder settings
+MEDIA_ROOT = os.path.join(BASE_DIR, 'beauty/media')
 
+MEDIA_URL = '/media/'
+# print(MEDIA_ROOT) - nevenkite padebuginti, bus lengviau nepasiklysti django filesystem džiunglėse
 

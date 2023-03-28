@@ -1,0 +1,17 @@
+{% extends "beauty/base.html" %}
+
+{% block content %}
+{% load static%}
+  {% if specialist_list %}
+<h3>Specialistu  sąrašas :</h3>
+  <ul>
+    {% for s in specialist_list %}
+          <li>
+        <a href="{{ s.id }}">{{ s.company }}</a> : ({{s.descriptions}})
+      </li>
+    {% endfor %}
+  </ul>
+  {% else %}
+    <p>Specialistu nera !!!</p>
+{% endif %}
+{% endblock %}

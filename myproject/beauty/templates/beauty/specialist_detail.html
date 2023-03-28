@@ -1,0 +1,13 @@
+{% extends "beauty/base.html" %}
+
+{% block content %}
+  <h1>{{ specialist.company }}</h1>
+
+  <p><strong>Salono pavadinimas :</strong> <a href="{% url 'specialist_detail' specialist.id %}">{{ specialist.company }}</a></p>
+  <p><strong>Specialisto vardas :</strong> {{ specialist.first_name }}</p>
+  <p><strong>Aprasymas :</strong> {{ specialist.description }}</p>
+  <p><strong>Adresas :</strong> {{ specialist.address }}</p>
+  <p><strong>Nuotrauka :</strong> {{ specialist.photo }}</p>
+  <div style="margin-left:20px;margin-top:20px">
+      </div>
+{% endblock %}
