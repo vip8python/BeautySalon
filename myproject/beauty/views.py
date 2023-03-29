@@ -13,7 +13,7 @@ def services(request):
     return render(request, 'beauty/services.html', {'services': sevices_list})
 
 
-def user(request):
+def client(request):
     pass
 
 

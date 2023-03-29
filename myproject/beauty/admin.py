@@ -2,7 +2,7 @@ from django.contrib import admin
 
 from .models import *
 
-class UserAdmin(admin.ModelAdmin):
+class ClientAdmin(admin.ModelAdmin):
     list_display = ('first_name', 'last_name', 'logo', 'phone_number', 'register', 'email')
     list_display_links = ('first_name', 'last_name')
     search_fields = ('first_name', 'last_name', "email")
@@ -19,7 +19,7 @@ class RegistrationAdmin(admin.ModelAdmin):
 
 
 
-admin.site.register(User, UserAdmin)
+admin.site.register(Client, ClientAdmin)
 admin.site.register(Services, ServicesAdmin)
 admin.site.register(Specialist, SpecialistAdmin)
 admin.site.register(Registration)

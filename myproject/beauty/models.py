@@ -2,7 +2,8 @@ from django.db import models
 from django.urls import reverse
 
 
-class User(models.Model):
+
+class Client(models.Model):
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
     logo = models.ImageField(upload_to='logo', null=True, blank=True)
@@ -14,7 +15,7 @@ class User(models.Model):
         return f'{self.first_name} {self.last_name}'
 
     def get_absolute_url(self):
-        return reverse('user-detail', args=[str(self.id)])
+        return reverse('client_detail', args=[str(self.id)])
 
 
 class Specialist(models.Model):
@@ -31,7 +32,7 @@ class Specialist(models.Model):
         return f'{self.company}'
 
     def get_absolute_url(self):
-        return reverse('specialist-detail', args=[str(self.id)])
+        return reverse('specialist_detail', args=[str(self.id)])
 
 
 class Services(models.Model):
@@ -60,12 +61,12 @@ class SpecialistServices(models.Model):
 
 class Registration(models.Model):
     date = models.DateTimeField()
-    user = models.ForeignKey('User', on_delete=models.SET_NULL, null=True, blank=True)
+    client = models.ForeignKey('Client', on_delete=models.SET_NULL, null=True, blank=True)
     specialist = models.ForeignKey('Specialist', on_delete=models.SET_NULL, null=True, blank=True)
 
     class Meta:
         ordering = ['date']
 
     def __str__(self):
-        return f'{self.date} : {self.user} - {self.specialist}'
-#       return f'({self.date} {self.user.first_name})'
+        return f'{self.date} : {self.client} - {self.specialist}'
+#       return f'({self.date} {self.client.first_name})'
