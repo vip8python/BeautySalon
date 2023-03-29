@@ -10,4 +10,33 @@
   <p><strong>Nuotrauka :</strong> {{ specialist.photo }}</p>
   <div style="margin-left:20px;margin-top:20px">
       </div>
+</br>
+  <h4>Atsiliepimai:</h4>
+  {% if specialist.specialistreview_set.all %}
+    {% for r in specialist.specialistreview_set.all %}
+      <hr>
+      <strong>{{ r.reviewer }}</strong>, <em>{{ r.date_created}}</em>
+      <p>{{ r.review }}</p>
+    {% endfor %}
+  {% else %}
+    <p>Specialistas atsiliepimų neturi !!!</p>
+  {% endif %}
+  {% if user.is_authenticated %}
+  <div class="fieldWrapper">
+    <hr><br/>
+    <h4>Palikite atsiliepimą:</h4>
+    <form action="" method="post">
+      {% csrf_token %}
+     {{ form }}</br>
+      <input type="submit"/>
+    <button class='js-captcha-refresh'></button>
+</form>
+    <script src="https://code.jquery.com/jquery-3.6.4.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/emojionearea/3.4.2/emojionearea.min.css"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/emojionearea/3.4.2/emojionearea.min.js"></script>
+       <script type="text/javascript">
+      $('#id_review').emojioneArea({pickerPosition: 'bottom'});
+</script>
+ </div>
+  {% endif %}
 {% endblock %}

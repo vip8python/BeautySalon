@@ -10,4 +10,5 @@ urlpatterns = [
 
     path('specialists/', SpecialistListView.as_view(), name='specialist'),
     path('specialists/<int:pk>/', SpecialistDetailView.as_view(), name='specialist_detail'),
+    path('register/', register, name='register')
 ]

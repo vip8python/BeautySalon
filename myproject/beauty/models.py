@@ -1,5 +1,7 @@
 from django.db import models
 from django.urls import reverse
+from django.contrib.auth.models import User
+from datetime import date
 
 
 
@@ -28,12 +30,24 @@ class Specialist(models.Model):
     register = models.DateField()
     photo = models.ImageField(null=True, blank=True)
 
+
     def __str__(self):
         return f'{self.company}'
 
     def get_absolute_url(self):
         return reverse('specialist_detail', args=[str(self.id)])
 
+
+class SpecialistReview(models.Model):
+    specialist = models.ForeignKey('Specialist', on_delete=models.SET_NULL, null=True, blank=True)
+    reviewer = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
+    date_created = models.DateTimeField(auto_now_add=True)
+    review = models.TextField(max_length=2000)
+
+    class Meta:
+        verbose_name = "Atsiliepimas"
+        verbose_name_plural = 'Atsiliepimai'
+        ordering = ['-date_created']
 
 class Services(models.Model):
     service_name = models.CharField(max_length=50)

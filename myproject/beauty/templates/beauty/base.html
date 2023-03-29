@@ -11,16 +11,16 @@
             integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N"
             crossorigin="anonymous"></script>
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
-    <style>
-        body {
-            padding: 0;
-            list-style: none;
-            background-image: url("{% static 'beauty/images/beauty1.jpg' %}");
-            background-size: cover;
-            min-height: 100vh;
-            color: #000;
-        }
-    </style>
+<!--    <style>-->
+<!--        body {-->
+<!--            padding: 0;-->
+<!--            list-style: none;-->
+<!--            background-image: url("{% static 'beauty/images/beauty1.jpg' %}");-->
+<!--            background-size: cover;-->
+<!--            min-height: 100vh;-->
+<!--            color: #000;-->
+<!--        }-->
+<!--    </style>-->
 </head>
 
 <div class="container-fluid">
@@ -65,6 +65,13 @@
 </style>
 
 <body>
+{% if messages %}
+    {% for message in messages %}
+        <div class="alert alert-{% if message.tags == 'error' %}danger{% elif message.tags == 'info' %}success{% endif %}" role="alert">
+                {{ message }}
+        </div>
+    {% endfor %}
+{% endif %}
 <div>
 {% block content %}
 {% endblock %}

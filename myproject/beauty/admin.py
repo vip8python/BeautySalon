@@ -10,6 +10,12 @@ class SpecialistAdmin(admin.ModelAdmin):
     list_display = ('first_name', 'last_name', 'company', 'address')
     search_fields = ('firs_name', 'last_name', 'company')
 
+
+class SpecialistReviewAdmin(admin.ModelAdmin):
+    list_display = ('specialist', 'date_created', 'reviewer', 'review')
+
+
+
 class ServicesAdmin(admin.ModelAdmin):
     list_display = ('service_name', 'price')
     search_fields = ('service_name',)
@@ -24,4 +30,5 @@ admin.site.register(Services, ServicesAdmin)
 admin.site.register(Specialist, SpecialistAdmin)
 admin.site.register(Registration)
 admin.site.register(SpecialistServices)
+admin.site.register(SpecialistReview, SpecialistReviewAdmin)
 
