@@ -1,6 +1,7 @@
 {% extends "beauty/base.html" %}
 {% load crispy_forms_tags %}
 {% block content %}
+<div class="container"><br>
     <div class="content-section">
         {% if messages %}
         {% for message in messages %}
@@ -27,5 +28,6 @@
                 <button class="btn btn-outline-info" type="submit">Atnaujinti</button>
             </div>
         </form>
+    </div>
     </div>
 {% endblock content %}

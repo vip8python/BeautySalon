@@ -1,15 +1,15 @@
 {% extends "beauty/base.html" %}
 
 {% block content %}
-    <h1>Mano paimtos knygos</h1>
+    <h1>Mano specialistai</h1>
 
-    {% if bookinstance_list %}
+    {% if specialist_list %}
     <ul>
 
       {% for s in specialist_list %}
-        <img class="rounded-circle" src="{{s.reader.profilis.nuotrauka.url}}">
+        <img class="rounded-circle" src="{{s.company}}">
       <li class="{% if s.is_overdue %}text-danger{% endif %}">
-        <a href="{% url 'specialist_detail' s.book.pk %}">{{s.book.title}}</a> ({{ s.due_back }})
+        <a href="{% url 'specialist_detail' s.address %}">{{s.company}}</a> ({{ s.photo }})
       <br/>
         <a class="btn btn-primary" href="{{ specialist.pk }}" role="button">Peržiūrėti</a>
       </li>
