@@ -1,0 +1,22 @@
+{% extends "beauty/base.html" %}
+
+{% block content %}
+    <h1>Mano paimtos knygos</h1>
+
+    {% if bookinstance_list %}
+    <ul>
+
+      {% for s in specialist_list %}
+        <img class="rounded-circle" src="{{s.reader.profilis.nuotrauka.url}}">
+      <li class="{% if s.is_overdue %}text-danger{% endif %}">
+        <a href="{% url 'specialist_detail' s.book.pk %}">{{s.book.title}}</a> ({{ s.due_back }})
+      <br/>
+        <a class="btn btn-primary" href="{{ specialist.pk }}" role="button">Peržiūrėti</a>
+      </li>
+      {% endfor %}
+    </ul>
+
+    {% else %}
+      <p>There are no books borrowed.</p>
+    {% endif %}
+{% endblock %}

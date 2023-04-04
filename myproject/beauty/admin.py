@@ -24,7 +24,7 @@ class RegistrationAdmin(admin.ModelAdmin):
     list_display = ('data', )
 
 
-
+admin.site.register(Profilis)
 admin.site.register(Client, ClientAdmin)
 admin.site.register(Services, ServicesAdmin)
 admin.site.register(Specialist, SpecialistAdmin)

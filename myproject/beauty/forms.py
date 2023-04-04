@@ -8,3 +8,16 @@ class SpecialistReviewForm(forms.ModelForm):
         model = SpecialistReview
         fields = ('review', 'specialist', 'reviewer', 'captcha')
         widgets = {'specialist': forms.HiddenInput(), 'reviewer': forms.HiddenInput()}
+
+class UserUpdateForm(forms.ModelForm):
+    email = forms.EmailField()
+
+    class Meta:
+        model = User
+        fields = ['username', 'email']
+
+
+class ProfilisUpdateForm(forms.ModelForm):
+    class Meta:
+        model = Profilis
+        fields = ['nuotrauka']

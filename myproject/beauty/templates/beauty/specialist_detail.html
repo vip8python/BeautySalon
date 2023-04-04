@@ -1,7 +1,7 @@
 {% extends "beauty/base.html" %}
 
 {% block content %}
-  <h1>{{ specialist.company }}</h1>
+  <div class="container"><h1>{{ specialist.company }}</h1>
 
   <p><strong>Salono pavadinimas :</strong> <a href="{% url 'specialist_detail' specialist.id %}">{{ specialist.company }}</a></p>
   <p><strong>Specialisto vardas :</strong> {{ specialist.first_name }}</p>
@@ -38,5 +38,6 @@
       $('#id_review').emojioneArea({pickerPosition: 'bottom'});
 </script>
  </div>
+      </div>
   {% endif %}
 {% endblock %}

@@ -31,10 +31,10 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'beauty',
+    'beauty.apps.BeautyConfig',
     # 'tinymce',
-    # 'crispy_forms',
-    # 'crispy_bootstrap4',
+    'crispy_forms',
+    'crispy_bootstrap4',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -167,4 +167,4 @@ EMAIL_HOST_PASSWORD = 'VerySecret'
 #     'statusbar': True,
 #     }
 #
-# CRISPY_TEMPLATE_PACK = 'bootstrap4'
+CRISPY_TEMPLATE_PACK = 'bootstrap4'

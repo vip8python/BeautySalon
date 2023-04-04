@@ -7,6 +7,8 @@ from django.contrib import messages
 from django.views.generic.edit import FormMixin
 from .forms import *
 from django.db.models import Q
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views.generic import ListView, DetailView
 
 
 def base(request):
@@ -93,3 +95,47 @@ def register(request):
             messages.error(request, 'Slaptažodžiai nesutampa!')
             return redirect('register')
     return render(request, 'beauty/register.html')
+
+
+from django.contrib.auth.decorators import login_required
+
+@login_required
+def profilis(request):
+    return render(request, 'beauty/profilis.html')
+
+
+
+@login_required
+def profilis(request):
+    if request.method == "POST":
+        u_form = UserUpdateForm(request.POST, instance=request.user)
+        p_form = ProfilisUpdateForm(request.POST, request.FILES, instance=request.user.profilis)
+        if u_form.is_valid() and p_form.is_valid():
+            u_form.save()
+            p_form.save()
+            messages.success(request, f"Profilis atnaujintas")
+            return redirect('profilis')
+    else:
+        u_form = UserUpdateForm(instance=request.user)
+        p_form = ProfilisUpdateForm(instance=request.user.profilis)
+
+    context = {
+        'u_form': u_form,
+        'p_form': p_form,
+    }
+    return render(request, 'beauty/profilis.html', context)
+
+
+class SpecialistsByUserListView(LoginRequiredMixin, ListView):
+    model = Specialist
+    context_object_name = 'specialists'
+    template_name = 'beauty/user_specialist.html'
+    paginate_by = 10
+
+    def get_queryset(self):
+        return Specialist.objects.filter(reader=self.request.user)
+
+
+class SpecialistByUserDetailView(LoginRequiredMixin, DetailView):
+    model = Client
+    template_name = 'beauty/user_client.html'
