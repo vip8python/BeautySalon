@@ -1,6 +1,10 @@
 {% extends "beauty/base.html" %}
+{% load static %}
 
 {% block content %}
+<div class="container">
+
+
 <br><br>
 <strong style="color: black;">Paslaugos:</strong>
 <br><br>
@@ -8,5 +12,7 @@
   <ul>
       <li> {{ s.service_name }}</li>
   </ul>
+
 {% endfor %}
+    </div>
 {% endblock %}

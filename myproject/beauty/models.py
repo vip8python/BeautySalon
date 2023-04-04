@@ -7,12 +7,15 @@ from PIL import Image
 
 
 class Client(models.Model):
+    username = models.CharField(max_length=50, default='')
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
     logo = models.ImageField(upload_to='logo', null=True, blank=True)
     phone_number = models.CharField(max_length=20)
-    register = models.DateField()
+    register = models.DateField(null=True, blank=True)
     email = models.CharField(max_length=50)
+    password = models.CharField(max_length=50, default='')
+
 
     def __str__(self):
         return f'{self.first_name} {self.last_name}'

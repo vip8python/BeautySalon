@@ -2,6 +2,7 @@
 
 {% block content %}
 {% load static%}<br><br>
+<div class="container">
   {% if specialist_list %}
 <h3>Specialistu  sąrašas :</h3><br>
   <ul>
@@ -14,4 +15,5 @@
   {% else %}
     <p>Specialistu nera !!!</p>
 {% endif %}
+    </div>
 {% endblock %}

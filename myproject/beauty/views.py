@@ -1,4 +1,6 @@
 from django.shortcuts import render, redirect, reverse, get_object_or_404
+from django.utils import timezone
+
 from .models import *
 from django.views import generic
 from django.contrib.auth.forms import User
@@ -70,26 +72,29 @@ def search(request):
 @csrf_protect
 def register(request):
     if request.method == "POST":
-        # pasiimame reikšmes iš registracijos formos
         username = request.POST['username']
+        first_name = request.POST['first_name']
+        last_name = request.POST['last_name']
+        phone_number = request.POST['phone_number']
         email = request.POST['email']
         password = request.POST['password']
         password2 = request.POST['password2']
         # tikriname, ar sutampa slaptažodžiai
         if password == password2:
             # tikriname, ar neužimtas username
-            if User.objects.filter(username=username).exists():
+            if Client.objects.filter(username=username).exists():
                 messages.error(request, f'Vartotojo vardas {username} užimtas!')
                 return redirect('register')
             else:
                 # tikriname, ar nėra tokio pat email
-                if User.objects.filter(email=email).exists():
+                if Client.objects.filter(email=email).exists():
                     messages.error(request, f'Vartotojas su el. paštu {email} jau užregistruotas!')
                     return redirect('register')
                 else:
                     # jeigu viskas tvarkoje, sukuriame naują vartotoją
-                    User.objects.create_user(username=username, email=email, password=password)
-                    messages.info(request, f'Vartotojas {username} užregistruotas!')
+                    Client.objects.create(first_name=first_name, username=username, last_name=last_name, phone_number=phone_number,
+                                          email=email, password=password, register=timezone.now(), logo='profile_pics/default.png')
+                    messages.info(request, f'Klientas  {first_name} {last_name} užregistruotas!')
                     return redirect('login')
         else:
             messages.error(request, 'Slaptažodžiai nesutampa!')
@@ -129,13 +134,13 @@ def profilis(request):
 class SpecialistsByUserListView(LoginRequiredMixin, ListView):
     model = Specialist
     context_object_name = 'specialists'
-    template_name = 'beauty/user_specialist.html'
+    template_name = 'beauty/user_client.html'
     paginate_by = 10
 
     def get_queryset(self):
-        return Specialist.objects.filter(reader=self.request.user)
+        return Specialist.objects.filter(company=self.request.user)
 
 
 class SpecialistByUserDetailView(LoginRequiredMixin, DetailView):
     model = Client
-    template_name = 'beauty/user_client.html'
+    template_name = 'beauty/user_specialist.html'

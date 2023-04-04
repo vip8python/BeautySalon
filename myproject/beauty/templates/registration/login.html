@@ -10,8 +10,8 @@
     {% if user.is_authenticated %}
       <p>Neturite prieigos prie šios informacijos. Turite prisijungti.</p>
     {% endif %}
-  {% endif %}
-  
+  {% endif %}<br><br>
+  <div class="container">
   <form method="post" action="{% url 'login' %}">
     {% csrf_token %}
     <table>
@@ -20,15 +20,15 @@
         <td>{{ form.username }}</td>
       </tr>
       <tr>
-        <td style="color: black;">Slaptažodis: </td>
+        <td style="color: black;"> Slaptažodis:  </td>
         <td>{{ form.password }}</td>
       </tr>
-    </table>
-    <input type="submit" value="Prisijungti" />
-    <li class="nav-item"><a class="nav-link" href="{% url 'register'%}">Registruotis</a></li>
+    </table><br>
+    <input type="submit" value="Prisijungti"><br><br>
+    <a class="nav-link" href="{% url 'register'%}">Registruotis</a>
     <input type="hidden" name="next" value="{{ next }}" />
   </form>
   
   <p><a href="{% url 'password_reset' %}">Pamiršote slaptažodį?</a></p>
-  
+ </div>
 {% endblock %}
