@@ -49,8 +49,7 @@ class SpecialistReview(models.Model):
     review = models.TextField(max_length=2000)
 
     class Meta:
-        verbose_name = "Atsiliepimas"
-        verbose_name_plural = 'Atsiliepimai'
+        verbose_name_plural = 'reviews'
         ordering = ['-date_created']
 
 class Services(models.Model):
@@ -103,4 +102,7 @@ class Profilis(models.Model):
             output_size = (150, 150)
             img.thumbnail(output_size)
             img.save(self.nuotrauka.path)
+
+    class Meta:
+        verbose_name_plural = 'Profiles'
 

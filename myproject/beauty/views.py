@@ -11,6 +11,7 @@ from .forms import *
 from django.db.models import Q
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import ListView, DetailView
+from django.contrib.auth.decorators import login_required
 
 
 def base(request):
@@ -30,12 +31,14 @@ def specialist(request):
     specialist_list = Specialist.objects.all()
     return render(request, 'beauty/specialist.html', {'specialist': specialist_list})
 
+
 def registration(request):
     pass
 
 class SpecialistListView(generic.ListView):
     model = Specialist
     template_name = 'beauty/specialist_list.html'
+    extra_context = {'title': 'Home page'}
 
 class SpecialistDetailView(FormMixin, generic.DetailView):
     model = Specialist
@@ -101,8 +104,6 @@ def register(request):
             return redirect('register')
     return render(request, 'beauty/register.html')
 
-
-from django.contrib.auth.decorators import login_required
 
 @login_required
 def profilis(request):
