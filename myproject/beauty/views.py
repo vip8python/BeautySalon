@@ -1,9 +1,6 @@
-from django.shortcuts import render, redirect, reverse, get_object_or_404
+from django.shortcuts import render, redirect
 from django.utils import timezone
-
-from .models import *
 from django.views import generic
-from django.contrib.auth.forms import User
 from django.views.decorators.csrf import csrf_protect
 from django.contrib import messages
 from django.views.generic.edit import FormMixin
@@ -12,10 +9,19 @@ from django.db.models import Q
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import ListView, DetailView
 from django.contrib.auth.decorators import login_required
+from .scrapers.delfi import *
+
 
 
 def base(request):
-    return render(request, 'beauty/base.html', {'title': 'Beauty'})
+    context = {
+        'img_title': img_title,
+        'img_links': img_links,
+        'links': links,
+        'title': 'Beauty',
+    }
+    return render(request, 'beauty/base.html', context)
+
 
 
 def services(request):
@@ -145,3 +151,8 @@ class SpecialistsByUserListView(LoginRequiredMixin, ListView):
 class SpecialistByUserDetailView(LoginRequiredMixin, DetailView):
     model = Client
     template_name = 'beauty/user_specialist.html'
+
+
+
+
+

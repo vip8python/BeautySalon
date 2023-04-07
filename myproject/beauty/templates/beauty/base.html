@@ -18,27 +18,18 @@ body {
 .card-container {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  grid-gap: 200px;
+  grid-gap: 150px;
 }
-
 .card-container img {
   width: 100%;
   height: 100%;
 }
-.card {
-  flex-basis: calc(33.33% - 20px);
-  margin-bottom: 20px;
-}
-
 footer {
   position: absolute;
   bottom: 0;
   width: 100%;
   text-align: center;
-
-
-
-
+  }
 </style>
 <header>
     <div class="head-top container-fluid">
@@ -111,27 +102,25 @@ footer {
 {% block content %}
 {% endblock %}
 <div class="card-container">
-    <div class="card">
-        <a href="{{}}" target="_blank">
-            <img src="{{ }}" alt="Image 1">
-            <p class="card-title">{{}}</p>
+    <div class="card-footer">
+        <a href="{{ links.0 }}" target="_blank">
+            <img src="{{ img_links.0 }}" alt="Image 1">
+            <p class="card-title">{{ img_title.0 }}</p>
         </a>
     </div>
-    <div class="card">
-        <a href="{% url 'profilis' %}" target="_blank">
-            <img src="{% static 'beauty/images/beauty2.jpg' %}" alt="Image 1">
-            <p class="card-title">Card title</p>
+    <div class="card-footer">
+        <a href="{{ links.1 }}" target="_blank">
+            <img src="{{ img_links.1 }}" alt="Image 1">
+            <p class="card-title">{{ img_title.1 }}</p>
         </a>
     </div>
-    <div class="card">
-        <a href="{% url 'profilis' %}" target="_blank">
-            <img src="{% static 'beauty/images/beauty4.jpg' %}" alt="Image 1">
-            <p class="card-title">Card title</p>
+    <div class="card-footer">
+        <a href="{{ links.2 }}" target="_blank">
+            <img src="{{ img_links.2 }}" alt="Image 1">
+            <p class="card-title">{{ img_title.2 }}</p>
         </a>
     </div>
-    </div>
-
-
+</div>
 
 <footer class="container-fluid mt-auto">
     <nav class="navbar navbar-expand-sm" style="background-color: #e3f2fd;">

@@ -1,6 +1,7 @@
 from bs4 import BeautifulSoup
 import requests
 
+
 source = requests.get('https://www.delfi.lt/stilius/grozis/').text
 soup = BeautifulSoup(source, 'html.parser')
 divas = soup.find('div', class_='C-block-type-102')
@@ -14,10 +15,11 @@ for link in divas.find_all('a'):
             links.append(new_link)
             link['href'] = new_link
 
-title = []
+img_title = []
 for img in divas.find_all('img'):
     alt = img.get('alt')
-    title.append(alt)
+    img_title.append(alt)
+
 
 img_links = []
 for img in divas.find_all('img'):

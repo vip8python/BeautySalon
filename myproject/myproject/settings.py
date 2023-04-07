@@ -168,3 +168,5 @@ EMAIL_HOST_PASSWORD = 'VerySecret'
 #     }
 #
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+
