@@ -1,5 +1,6 @@
 from django.urls import path
-from .views import *
+from .views import base, services, client, search, registration, SpecialistsByUserListView, SpecialistByUserDetailView, \
+    SpecialistListView, SpecialistDetailView, register, update_profile
 
 urlpatterns = [
     path('', base, name='base'),
@@ -7,7 +8,7 @@ urlpatterns = [
     path('clients/', client, name='client'),
     path('search/', search, name='search'),
     path('registration/', registration, name='registration'),
-    path('profile/', Profile, name='profile'),
+    path('profile/', update_profile, name='profile'),
     path('my_clients/', SpecialistsByUserListView.as_view(), name='user_client'),
     path('my_clients/<int:pk>', SpecialistByUserDetailView.as_view(), name='client_detail'),
     path('specialists/', SpecialistListView.as_view(), name='specialist'),

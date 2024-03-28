@@ -3,7 +3,6 @@ from django.db import models
 from django.urls import reverse
 from django.contrib.auth.models import User
 from PIL import Image
-from django.core.exceptions import ValidationError
 
 
 class Client(models.Model):
@@ -64,6 +63,7 @@ class Specialist(models.Model):
 
 
 class SpecialistReview(models.Model):
+    objects: models.Manager = models.Manager()
     specialist: Specialist = models.ForeignKey(Specialist, on_delete=models.SET_NULL, null=True, blank=True)
     reviewer: User = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
     date_created: models.DateTimeField = models.DateTimeField(auto_now_add=True)
@@ -121,6 +121,7 @@ class Registration(models.Model):
 
 
 class Profile(models.Model):
+    objects = models.Manager()
     user: User = models.OneToOneField(User, on_delete=models.CASCADE)
     photo: models.ImageField = models.ImageField(default="profile_pics/default.png", upload_to="profile_pics")
 

@@ -1,15 +1,18 @@
 from django.shortcuts import render, redirect
+from django.urls import reverse
 from django.utils import timezone
 from django.views import generic
 from django.views.decorators.csrf import csrf_protect
 from django.contrib import messages
 from django.views.generic.edit import FormMixin
-from .forms import *
+from .forms import SpecialistReviewForm, UserUpdateForm, ProfileUpdateForm
 from django.db.models import Q
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import ListView, DetailView
 from django.contrib.auth.decorators import login_required
-from .scrapers.delfi import *
+
+from .models import Specialist, Client, Services
+from .scrapers.delfi import img_title, img_links, links
 
 
 def base(request):
@@ -111,7 +114,7 @@ def view_profile(request):
 def update_profile(request):
     if request.method == "POST":
         u_form = UserUpdateForm(request.POST, instance=request.user)
-        p_form = ProfileUpdateForm(request.POST, request.FILES, instance=request.user.profilis)
+        p_form = ProfileUpdateForm(request.POST, request.FILES, instance=request.user.profile)
         if u_form.is_valid() and p_form.is_valid():
             u_form.save()
             p_form.save()
@@ -145,6 +148,7 @@ class SpecialistByUserDetailView(LoginRequiredMixin, DetailView):
 
 def client():
     pass
+
 
 def registration():
     pass
