@@ -111,20 +111,20 @@ def register(request):
 
 
 @login_required
-def profilis(request):
+def view_profile(request):
     return render(request, 'beauty/profile.html')
 
 
 @login_required
-def profilis(request):
+def update_profile(request):
     if request.method == "POST":
         u_form = UserUpdateForm(request.POST, instance=request.user)
         p_form = ProfileUpdateForm(request.POST, request.FILES, instance=request.user.profilis)
         if u_form.is_valid() and p_form.is_valid():
             u_form.save()
             p_form.save()
-            messages.success(request, f"Profilis atnaujintas")
-            return redirect('profilis')
+            messages.success(request, f"Profile update")
+            return redirect('profile')
     else:
         u_form = UserUpdateForm(instance=request.user)
         p_form = ProfileUpdateForm(instance=request.user.profilis)
