@@ -31,9 +31,10 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'beauty',
+    'beauty.apps.BeautyConfig',
+    # 'tinymce',
+    'crispy_forms',
     'crispy_bootstrap4',
-     'crispy_forms',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
