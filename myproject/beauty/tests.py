@@ -47,15 +47,15 @@ class UpdateProfileViewTest(TestCase):
         self.assertEqual(response.status_code, 302)  # Redirect to profile page
 
 
-# class SpecialistsByUserListViewTest(TestCase):
-#     """Testas vartotojų sąrašo peržiūrai"""
-#     def setUp(self):
-#         self.client.force_login(User.objects.create_user(username='testuser', password='password'))
-#
-#     def test_specialists_by_user_list_view(self):
-#         response = self.client.get(reverse('profile'))
-#         self.assertEqual(response.status_code, 200)
-#         self.assertTemplateUsed(response, 'beauty/user_client.html')
+class SpecialistsByUserListViewTest(TestCase):
+    """Testas vartotojų sąrašo peržiūrai"""
+    def setUp(self):
+        self.client.force_login(User.objects.create_user(username='testuser', password='password'))
+
+    def test_specialists_by_user_list_view(self):
+        response = self.client.get(reverse('profile'))
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'beauty/user_client.html')
 
 
 # class SpecialistDetailViewTest(TestCase):
