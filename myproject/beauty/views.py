@@ -10,7 +10,6 @@ from django.db.models import Q
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import ListView, DetailView
 from django.contrib.auth.decorators import login_required
-
 from .models import Specialist, Client, Services
 from .scrapers.delfi import img_title, img_links, links
 

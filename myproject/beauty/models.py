@@ -6,6 +6,7 @@ from PIL import Image
 
 
 class Client(models.Model):
+    objects: models.Manager = models.Manager()
     username: str = models.CharField(max_length=50, default='')
     first_name: str = models.CharField(max_length=50)
     last_name: str = models.CharField(max_length=50)
@@ -43,10 +44,10 @@ class Specialist(models.Model):
     company: str = models.CharField(max_length=50)
     first_name: str = models.CharField(max_length=50)
     last_name: str = models.CharField(max_length=50)
-    descriptions: str = models.CharField(max_length=2000)
-    calendar: models.DateTimeField = models.DateTimeField()
-    address: str = models.CharField(max_length=100)
-    register: models.DateField = models.DateField()
+    descriptions: str = models.CharField(max_length=2000, null=True, blank=True)
+    calendar: models.DateTimeField = models.DateTimeField(blank=True, null=True)
+    address: str = models.CharField(max_length=100, null=True, blank=True)
+    register: models.DateField = models.DateField(null=True, default=None)
     photo: models.ImageField = models.ImageField(null=True, blank=True)
 
     def __str__(self):
@@ -72,6 +73,9 @@ class SpecialistReview(models.Model):
     class Meta:
         verbose_name_plural = 'reviews'
         ordering = ['-date_created']
+
+    def __str__(self):
+        return self.review
 
 
 class Services(models.Model):

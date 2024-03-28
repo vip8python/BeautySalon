@@ -5,7 +5,7 @@
     <h1>Mano klientai :</h1>
     <hr>
         <ul>
-        <img class="rounded-circle" src="{{object.reader.profilis.nuotrauka.url}}">
+        <img class="rounded-circle" src="{{object.reader.profile.photo.url}}">
         <li><strong class="{% if object.is_overdue %}text-danger{% endif %}">Pavadinimas: {{object.book.title}}</strong></li>
         <li><strong>Gražinimo terminas:</strong> {{object.due_back}}</li>
         <br/>
