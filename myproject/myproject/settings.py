@@ -11,37 +11,31 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 import os
 from pathlib import Path
+from dotenv import load_dotenv
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+load_dotenv()
+SECRET_KEY = os.getenv('SECRET_KEY')
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
+DEBUG = os.getenv('DEBUG')
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-e1s_ppk)ja+vbd+@!q^ilm*#xvlanwq3sj+=i*iay@ojlg@kg-'
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-ALLOWED_HOSTS = []
-
-
-# Application definition
+ALLOWED_HOSTS = [os.getenv('ALLOWED_HOSTS')]
 
 INSTALLED_APPS = [
-    'beauty.apps.BeautyConfig',
-    # 'tinymce',
-    'crispy_forms',
-    'crispy_bootstrap4',
+
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    'crispy_forms',
+    'crispy_bootstrap4',
     'captcha',
+
+    'beauty.apps.BeautyConfig',
 ]
 
 MIDDLEWARE = [
@@ -54,13 +48,13 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'myproject.urls'
+ROOT_URLCONF = os.getenv('ROOT_URLCONF')
 
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [os.path.join(BASE_DIR, 'templates')],
-        'APP_DIRS': True,
+        'APP_DIRS': os.getenv('APP_DIRS'),
         'OPTIONS': {
             'context_processors': [
                 'django.template.context_processors.debug',
@@ -72,22 +66,14 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'myproject.wsgi.application'
-
-
-# Database
-# https://docs.djangoproject.com/en/4.1/ref/settings/#databases
+WSGI_APPLICATION = os.getenv('WSGI_APPLICATION')
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': os.getenv('DB_ENGINE'),
+        'NAME': BASE_DIR / os.getenv('DB_NAME'),
     }
 }
-
-
-# Password validation
-# https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -104,40 +90,29 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+LANGUAGE_CODE = os.getenv('LANGUAGE_CODE')
 
-# Internationalization
-# https://docs.djangoproject.com/en/4.1/topics/i18n/
+TIME_ZONE = os.getenv('TIME_ZONE')
 
-LANGUAGE_CODE = 'lt'
+USE_I18N = os.getenv('USE_I18N')
 
-TIME_ZONE = 'UTC'
-
-USE_I18N = True
-
-USE_TZ = True
-
-
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/4.1/howto/static-files/
+USE_TZ = os.getenv('USE_TZ')
 
 STATIC_URL = 'static/'
 
-DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+DEFAULT_AUTO_FIELD = os.getenv('DEFAULT_AUTO_FIELD')
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'beauty/media')
 MEDIA_URL = '/media/'
 
-DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-LOGIN_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = os.getenv('LOGIN_REDIRECT_URL')
 
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_POST = 587
-EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'beauty@gmail.com'
-# el. pašto adresas iš kurio siųsite
-EMAIL_HOST_PASSWORD = 'VerySecret'
-
+EMAIL_BACKEND = os.getenv('EMAIL_BACKEND')
+EMAIL_HOST = os.getenv('EMAIL_HOST')
+EMAIL_POST = os.getenv('EMAIL_POST')
+EMAIL_USE_TLS = os.getenv('EMAIL_USE_TLS')
+EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
 
 # TINYMCE_DEFAULT_CONFIG = {
 #     'height': 1360,
@@ -167,6 +142,4 @@ EMAIL_HOST_PASSWORD = 'VerySecret'
 #     'statusbar': True,
 #     }
 #
-CRISPY_TEMPLATE_PACK = 'bootstrap4'
-
-
+CRISPY_TEMPLATE_PACK = os.getenv('CRISPY_TEMPLATE_PACK')
