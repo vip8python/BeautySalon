@@ -1,9 +1,8 @@
+from django.contrib.auth.hashers import make_password
 from django.db import models
 from django.urls import reverse
 from django.contrib.auth.models import User
-from datetime import date
 from PIL import Image
-
 
 
 class Client(models.Model):
@@ -13,9 +12,13 @@ class Client(models.Model):
     logo = models.ImageField(upload_to='logo', null=True, blank=True)
     phone_number = models.CharField(max_length=20)
     register = models.DateField(null=True, blank=True)
-    email = models.CharField(max_length=50)
+    email = models.EmailField()
     password = models.CharField(max_length=50, default='')
 
+    def save(self, *args, **kwargs):
+        self.password = make_password(self.password)
+        self.username = make_password(self.username)
+        super().save(*args, kwargs)
 
     def __str__(self):
         return f'{self.first_name} {self.last_name}'
@@ -25,6 +28,7 @@ class Client(models.Model):
 
 
 class Specialist(models.Model):
+    objects = models.Manager()
     company = models.CharField(max_length=50)
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
@@ -33,7 +37,6 @@ class Specialist(models.Model):
     address = models.CharField(max_length=100)
     register = models.DateField()
     photo = models.ImageField(null=True, blank=True)
-
 
     def __str__(self):
         return f'{self.company}'
@@ -52,7 +55,9 @@ class SpecialistReview(models.Model):
         verbose_name_plural = 'reviews'
         ordering = ['-date_created']
 
+
 class Services(models.Model):
+    objects = models.Manager()
     service_name = models.CharField(max_length=50)
     time = models.PositiveIntegerField(default=15)
     price = models.PositiveIntegerField(default=0)
@@ -86,23 +91,22 @@ class Registration(models.Model):
 
     def __str__(self):
         return f'{self.date} : {self.client} - {self.specialist}'
-#       return f'({self.date} {self.client.first_name})'
 
-class Profilis(models.Model):
+
+class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    nuotrauka = models.ImageField(default="profile_pics/default.png", upload_to="profile_pics")
+    photo = models.ImageField(default="profile_pics/default.png", upload_to="profile_pics")
 
     def __str__(self):
         return f"{self.user.username} profilis"
 
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
-        img = Image.open(self.nuotrauka.path)
+        img = Image.open(self.photo.path)
         if img.height > 150 or img.width > 150:
             output_size = (150, 150)
             img.thumbnail(output_size)
-            img.save(self.nuotrauka.path)
+            img.save(self.photo.path)
 
     class Meta:
         verbose_name_plural = 'Profiles'
-

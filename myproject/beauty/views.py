@@ -12,7 +12,6 @@ from django.contrib.auth.decorators import login_required
 from .scrapers.delfi import *
 
 
-
 def base(request):
     context = {
         'img_title': img_title,
@@ -23,10 +22,9 @@ def base(request):
     return render(request, 'beauty/base.html', context)
 
 
-
 def services(request):
-    sevices_list = Services.objects.all()
-    return render(request, 'beauty/services.html', {'services': sevices_list})
+    services_list = Services.objects.all()
+    return render(request, 'beauty/services.html', {'services': services_list})
 
 
 def client(request):
@@ -41,10 +39,12 @@ def specialist(request):
 def registration(request):
     pass
 
+
 class SpecialistListView(generic.ListView):
     model = Specialist
     template_name = 'beauty/specialist_list.html'
     extra_context = {'title': 'Home page'}
+
 
 class SpecialistDetailView(FormMixin, generic.DetailView):
     model = Specialist
@@ -54,7 +54,6 @@ class SpecialistDetailView(FormMixin, generic.DetailView):
     def get_success_url(self):
         return reverse('specialist_detail', kwargs={'pk': self.object.id})
 
-
     def post(self, request, *args, **kwargs):
         self.object = self.get_object()
         form = self.get_form()
@@ -63,7 +62,6 @@ class SpecialistDetailView(FormMixin, generic.DetailView):
         else:
             return self.form_invalid(form)
 
-
     def form_valid(self, form):
         form.instance.specialist = self.object
         form.instance.reviewer = self.request.user
@@ -71,12 +69,11 @@ class SpecialistDetailView(FormMixin, generic.DetailView):
         return super(SpecialistDetailView, self).form_valid(form)
 
 
-
-
 def search(request):
     query = request.GET.get('query')
     search_results = Specialist.objects.filter(Q(company__icontains=query) | Q(address__icontains=query))
     return render(request, 'beauty/search.html', {'specialist': search_results, 'query': query})
+
 
 @csrf_protect
 def register(request):
@@ -101,8 +98,10 @@ def register(request):
                     return redirect('register')
                 else:
                     # jeigu viskas tvarkoje, sukuriame naują vartotoją
-                    Client.objects.create(first_name=first_name, username=username, last_name=last_name, phone_number=phone_number,
-                                          email=email, password=password, register=timezone.now(), logo='profile_pics/default.png')
+                    Client.objects.create(first_name=first_name, username=username, last_name=last_name,
+                                          phone_number=phone_number,
+                                          email=email, password=password, register=timezone.now(),
+                                          logo='profile_pics/default.png')
                     messages.info(request, f'Klientas  {first_name} {last_name} užregistruotas!')
                     return redirect('login')
         else:
@@ -113,15 +112,14 @@ def register(request):
 
 @login_required
 def profilis(request):
-    return render(request, 'beauty/profilis.html')
-
+    return render(request, 'beauty/profile.html')
 
 
 @login_required
 def profilis(request):
     if request.method == "POST":
         u_form = UserUpdateForm(request.POST, instance=request.user)
-        p_form = ProfilisUpdateForm(request.POST, request.FILES, instance=request.user.profilis)
+        p_form = ProfileUpdateForm(request.POST, request.FILES, instance=request.user.profilis)
         if u_form.is_valid() and p_form.is_valid():
             u_form.save()
             p_form.save()
@@ -129,13 +127,13 @@ def profilis(request):
             return redirect('profilis')
     else:
         u_form = UserUpdateForm(instance=request.user)
-        p_form = ProfilisUpdateForm(instance=request.user.profilis)
+        p_form = ProfileUpdateForm(instance=request.user.profilis)
 
     context = {
         'u_form': u_form,
         'p_form': p_form,
     }
-    return render(request, 'beauty/profilis.html', context)
+    return render(request, 'beauty/profile.html', context)
 
 
 class SpecialistsByUserListView(LoginRequiredMixin, ListView):
@@ -151,8 +149,3 @@ class SpecialistsByUserListView(LoginRequiredMixin, ListView):
 class SpecialistByUserDetailView(LoginRequiredMixin, DetailView):
     model = Client
     template_name = 'beauty/user_specialist.html'
-
-
-
-
-
