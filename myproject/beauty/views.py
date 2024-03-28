@@ -27,17 +27,9 @@ def services(request):
     return render(request, 'beauty/services.html', {'services': services_list})
 
 
-def client(request):
-    pass
-
-
 def specialist(request):
     specialist_list = Specialist.objects.all()
     return render(request, 'beauty/specialist.html', {'specialist': specialist_list})
-
-
-def registration(request):
-    pass
 
 
 class SpecialistListView(generic.ListView):
@@ -70,7 +62,7 @@ class SpecialistDetailView(FormMixin, generic.DetailView):
 
 
 def search(request):
-    query = request.GET.get('query')
+    query: str = request.GET.get('query')
     search_results = Specialist.objects.filter(Q(company__icontains=query) | Q(address__icontains=query))
     return render(request, 'beauty/search.html', {'specialist': search_results, 'query': query})
 
@@ -78,13 +70,13 @@ def search(request):
 @csrf_protect
 def register(request):
     if request.method == "POST":
-        username = request.POST['username']
-        first_name = request.POST['first_name']
-        last_name = request.POST['last_name']
-        phone_number = request.POST['phone_number']
-        email = request.POST['email']
-        password = request.POST['password']
-        password2 = request.POST['password2']
+        username: str = request.POST['username']
+        first_name: str = request.POST['first_name']
+        last_name: str = request.POST['last_name']
+        phone_number: str = request.POST['phone_number']
+        email: str = request.POST['email']
+        password: str = request.POST['password']
+        password2: str = request.POST['password2']
         # tikriname, ar sutampa slaptažodžiai
         if password == password2:
             # tikriname, ar neužimtas username
@@ -127,7 +119,7 @@ def update_profile(request):
             return redirect('profile')
     else:
         u_form = UserUpdateForm(instance=request.user)
-        p_form = ProfileUpdateForm(instance=request.user.profilis)
+        p_form = ProfileUpdateForm(instance=request.user.profile)
 
     context = {
         'u_form': u_form,
@@ -149,3 +141,10 @@ class SpecialistsByUserListView(LoginRequiredMixin, ListView):
 class SpecialistByUserDetailView(LoginRequiredMixin, DetailView):
     model = Client
     template_name = 'beauty/user_specialist.html'
+
+
+def client():
+    pass
+
+def registration():
+    pass
