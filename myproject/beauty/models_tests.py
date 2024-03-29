@@ -1,7 +1,10 @@
+import os
+
+from PIL import Image
 from django.test import TestCase
 from django.utils import timezone
 
-from .models import Client, Specialist, Profile, SpecialistReview, Services
+from .models import Client, Specialist, Profile, SpecialistReview, Services, SpecialistServices, Registration
 from django.urls import reverse
 from django.contrib.auth.models import User
 from datetime import datetime
@@ -60,3 +63,35 @@ class ServicesTest(TestCase):
 
     def test_client_str(self):
         self.assertEqual(str(self.services), 'service')
+
+
+class SpecialistServicesModelTest(TestCase):
+    def setUp(self):
+        self.specialist = Specialist.objects.create(company='Company A')
+        self.service = Services.objects.create(service_name='Service A')
+        self.specialist_service = SpecialistServices.objects.create(
+            specialist=self.specialist,
+            service=self.service
+        )
+
+    def test_specialist_services_str(self):
+        expected_str = f'{self.specialist} - {self.service}'
+        self.assertEqual(str(self.specialist_service), expected_str)
+
+
+class RegistrationTest(TestCase):
+    def setUp(self):
+        self.specialist = Specialist.objects.create(company='Apple')
+        self.client = Client.objects.create(first_name='John', last_name='Walker')
+        self.registration = Registration.objects.create(
+            date=timezone.now(),
+            client=self.client,
+            specialist=self.specialist
+        )
+
+    def test_registration_str(self):
+        expected_str = f'{self.registration.date} : {self.client} - {self.specialist}'
+        self.assertEqual(str(self.registration), expected_str)
+
+
+

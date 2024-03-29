@@ -96,6 +96,7 @@ class Services(models.Model):
 
 
 class SpecialistServices(models.Model):
+    objects: models.Manager = models.Manager()
     specialist: Specialist = models.ForeignKey(Specialist, on_delete=models.SET_NULL, null=True, blank=True)
     service: Services = models.ForeignKey(Services, on_delete=models.SET_NULL, null=True, blank=True)
 
@@ -110,6 +111,7 @@ class SpecialistServices(models.Model):
 
 
 class Registration(models.Model):
+    objects: models.Manager = models.Manager()
     date: models.DateTimeField = models.DateTimeField()
     client: Client = models.ForeignKey(Client, on_delete=models.SET_NULL, null=True, blank=True)
     specialist: Specialist = models.ForeignKey(Specialist, on_delete=models.SET_NULL, null=True, blank=True)
