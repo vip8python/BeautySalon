@@ -1,8 +1,8 @@
 from django.contrib.auth.models import User
 from django.core.files.uploadedfile import SimpleUploadedFile
 from django.test import TestCase
-from .forms import SpecialistReviewForm, UserUpdateForm, ProfileUpdateForm
-from .models import Specialist
+from myproject.beauty.forms import SpecialistReviewForm, UserUpdateForm, ProfileUpdateForm
+from myproject.beauty.models import Specialist
 
 
 class TestForms(TestCase):

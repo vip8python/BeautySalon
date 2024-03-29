@@ -3,10 +3,10 @@
 <div class="container">
 <br><br>
 <strong style="color: black;">Paslaugos:</strong>
-<br><br>
-{% for s in services %}
+  <br><br>
+{% for service in services %}
   <ul>
-      <li> {{ s.service_name }}</li>
+      <li> {{ service.service_name }}</li>
   </ul>
 {% endfor %}
     </div>

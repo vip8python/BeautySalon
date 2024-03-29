@@ -4,7 +4,7 @@ from PIL import Image
 from django.test import TestCase
 from django.utils import timezone
 
-from .models import Client, Specialist, Profile, SpecialistReview, Services, SpecialistServices, Registration
+from myproject.beauty.models import Client, Specialist, Profile, SpecialistReview, Services, SpecialistServices, Registration
 from django.urls import reverse
 from django.contrib.auth.models import User
 from datetime import datetime
