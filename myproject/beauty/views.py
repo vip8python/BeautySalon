@@ -1,3 +1,4 @@
+from django.http import HttpResponseNotFound
 from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.utils import timezone
@@ -151,3 +152,11 @@ def client():
 
 def registration():
     pass
+
+
+def blog():
+    pass
+
+
+def page_not_found(request, exception):
+    return HttpResponseNotFound('<h1>Page not found</h1>')
