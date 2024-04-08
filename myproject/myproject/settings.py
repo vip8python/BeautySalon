@@ -88,6 +88,8 @@ USE_I18N = os.getenv('USE_I18N')
 USE_TZ = os.getenv('USE_TZ')
 
 STATIC_URL = 'static/'
+STATICFILES_DIRS = [BASE_DIR / 'myproject/static']
+
 
 DEFAULT_AUTO_FIELD = os.getenv('DEFAULT_AUTO_FIELD')
 
@@ -132,4 +134,3 @@ EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
 #     }
 #
 CRISPY_TEMPLATE_PACK = os.getenv('CRISPY_TEMPLATE_PACK')
-

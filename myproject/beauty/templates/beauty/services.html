@@ -1,4 +1,5 @@
 {% extends "beauty/base.html" %}
+{% load beauty_tags %}
 {% block content %}
 <div class="container">
 <br><br>
@@ -10,4 +11,11 @@
   </ul>
 {% endfor %}
     </div>
+{% cat_tags as category %}
+
+{% for cat in category %}
+<li><a href="{% url 'category' cat.id %}">{{ cat.name }}</a></li>
+{% endfor %}
+
+{% show_categories  cat_selected %}
 {% endblock %}

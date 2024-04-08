@@ -27,7 +27,7 @@ def base(request):
 
 def services(request):
     services_list = Services.objects.all()
-    return render(request, 'beauty/services.html', {'services': services_list})
+    return render(request, 'beauty/services.html', {'services': services_list, 'cat_selected': 0})
 
 
 def specialist(request):
@@ -146,7 +146,7 @@ class SpecialistByUserDetailView(LoginRequiredMixin, DetailView):
     template_name = 'beauty/user_specialist.html'
 
 
-def client():
+def client(request):
     pass
 
 
@@ -160,3 +160,16 @@ def blog():
 
 def page_not_found(request, exception):
     return HttpResponseNotFound('<h1>Page not found</h1>')
+
+
+category_db = [
+    {'id': 1, 'name': 'Men'},
+    {'id': 2, 'name': 'Women'},
+    {'id': 3, 'name': 'Kids'},
+]
+
+
+def show_category(request, cat_id):
+    services_list = Services.objects.all()
+    return render(request, 'beauty/services.html', {'services': services_list, 'cat_selected': cat_id})
+
