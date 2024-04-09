@@ -39,6 +39,11 @@ class Client(models.Model):
         return reverse('client_detail', args=[str(self.id)])
 
 
+class ActiveManager(models.Manager):
+    def get_queryset(self):
+        return super().get_queryset().filter(is_active=True)
+
+
 class Specialist(models.Model):
     objects: models.Manager = models.Manager()
     company: str = models.CharField(max_length=50)
@@ -49,6 +54,9 @@ class Specialist(models.Model):
     address: str = models.CharField(max_length=100, null=True, blank=True)
     register: models.DateField = models.DateField(null=True, default=None)
     photo: models.ImageField = models.ImageField(null=True, blank=True)
+    is_active: models.BooleanField = models.BooleanField(default=False)
+
+    active = ActiveManager()
 
     def __str__(self):
         """

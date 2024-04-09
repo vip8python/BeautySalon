@@ -31,8 +31,8 @@ def services(request):
 
 
 def specialist(request):
-    specialist_list = Specialist.objects.all()
-    return render(request, 'beauty/specialist.html', {'specialist': specialist_list})
+    specialist_list = Specialist.active.all()
+    return render(request, 'beauty/specialist_active.html', {'specialist': specialist_list})
 
 
 class SpecialistListView(generic.ListView):
