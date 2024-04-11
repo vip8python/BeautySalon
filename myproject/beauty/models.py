@@ -49,12 +49,14 @@ class Specialist(models.Model):
     company: str = models.CharField(max_length=50)
     first_name: str = models.CharField(max_length=50)
     last_name: str = models.CharField(max_length=50)
-    descriptions: str = models.CharField(max_length=2000, null=True, blank=True)
+    description: str = models.CharField(max_length=2000, null=True, blank=True)
     calendar: models.DateTimeField = models.DateTimeField(blank=True, null=True)
     address: str = models.CharField(max_length=100, null=True, blank=True)
     register: models.DateField = models.DateField(null=True, default=None)
     photo: models.ImageField = models.ImageField(null=True, blank=True)
     is_active: models.BooleanField = models.BooleanField(default=False)
+    qualification: 'Qualification' = models.OneToOneField('Qualification', on_delete=models.SET_NULL, null=True,
+                                                          blank=True)
 
     active = ActiveManager()
 
@@ -69,6 +71,15 @@ class Specialist(models.Model):
         Returns the absolute URL of the Specialist instance.
         """
         return reverse('specialist_detail', args=[str(self.id)])
+
+
+class Qualification(models.Model):
+    name: models.CharField = models.CharField(max_length=248, blank=True, null=True)
+    data: models.DateTimeField = models.DateTimeField(blank=True, null=True)
+    description: models.TextField = models.TextField(blank=True, null=True)
+
+    def __str__(self):
+        return self.name
 
 
 class SpecialistReview(models.Model):
