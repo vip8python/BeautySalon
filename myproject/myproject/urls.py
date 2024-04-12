@@ -9,9 +9,8 @@ urlpatterns = [
                   path('', include('beauty.urls')),
                   path('captcha/', include('captcha.urls')),
                   path('accounts/', include('django.contrib.auth.urls')),
+                  path('__debug__/', include('debug_toolbar.urls')),
               ] + (static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
                    + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT))
 
-
 handler404 = page_not_found
-
