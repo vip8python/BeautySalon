@@ -71,7 +71,7 @@ footer {
                     <a class="nav-link" href="{% url 'services' %}">Paslaugos</a>
                     <a class="nav-link" href="{% url 'specialist' %}">Salonai</a>
                     <a class="nav-link" href="{% url 'user_client' %}">Mano klientai</a>
-                    <a class="nav-link" href="#">Mano uzsakymai</a>
+                    <a class="nav-link" href="{% url 'registration' %}">Mano uzsakymai</a>
                     <a class="nav-link" href="#">Kalendorius</a>
                     {% if user.is_authenticated %}
                     <a class="nav-link" href="{% url 'profile' %}">

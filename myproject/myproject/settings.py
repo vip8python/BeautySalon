@@ -91,7 +91,9 @@ USE_I18N = os.getenv('USE_I18N')
 USE_TZ = os.getenv('USE_TZ')
 
 STATIC_URL = 'static/'
-STATICFILES_DIRS = [BASE_DIR / 'myproject/static']
+STATICFILES_DIRS = [
+    BASE_DIR / 'beauty/static',
+]
 
 
 DEFAULT_AUTO_FIELD = os.getenv('DEFAULT_AUTO_FIELD')

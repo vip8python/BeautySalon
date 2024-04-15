@@ -11,7 +11,7 @@ from django.db.models import Q
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import ListView, DetailView
 from django.contrib.auth.decorators import login_required
-from .models import Specialist, Client, Services
+from .models import Specialist, Client, Services, Registration
 from .scrapers.delfi import img_title, img_links, links
 
 
@@ -150,8 +150,9 @@ def client(request):
     pass
 
 
-def registration():
-    pass
+def registration(request):
+    my_registration = Registration.objects.all()
+    return render(request, 'beauty/registration.html', {'my_registration': my_registration})
 
 
 def blog():
@@ -172,4 +173,3 @@ category_db = [
 def show_category(request, cat_id):
     services_list = Services.objects.all()
     return render(request, 'beauty/services.html', {'services': services_list, 'cat_selected': cat_id})
-

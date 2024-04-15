@@ -1,0 +1,20 @@
+{% extends "beauty/base.html" %}
+
+{% block content %}
+<h1>Mano uzsakymai: </h1>
+
+{% if my_registration %}
+<ul>
+
+  {% for register in my_registration %}
+
+  <li>
+    <p>{{ register.specialist }} - {{ register.date }}</p>
+  </li>
+  {% endfor %}
+</ul>
+
+{% else %}
+<p>No registration</p>
+{% endif %}
+{% endblock %}

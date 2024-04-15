@@ -14,3 +14,5 @@ urlpatterns = [
                    + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT))
 
 handler404 = page_not_found
+admin.site.site_header = 'Beauty salon'
+admin.site.index_title = 'Beauty salon administration'

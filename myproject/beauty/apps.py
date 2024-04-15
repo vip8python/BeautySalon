@@ -2,6 +2,7 @@ from django.apps import AppConfig
 
 
 class BeautyConfig(AppConfig):
+    verbose_name = 'ADMINISTRATION'
     default_auto_field = 'django.db.models.BigAutoField'
     name = 'beauty'
 

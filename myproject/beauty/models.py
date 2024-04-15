@@ -14,7 +14,7 @@ class Client(models.Model):
                                                 null=True,
                                                 blank=True)
     phone_number: str = models.CharField(max_length=20)
-    register: models.DateField | None = models.DateField(null=True, blank=True)
+    register: models.DateField | None = models.DateField(null=True, blank=True, verbose_name='register data')
     email: str = models.EmailField()
     password: str = models.CharField(max_length=50, default='')
 
@@ -46,7 +46,7 @@ class ActiveManager(models.Manager):
 
 class Specialist(models.Model):
     objects: models.Manager = models.Manager()
-    company: str = models.CharField(max_length=50)
+    company: str = models.CharField(max_length=50, verbose_name='company name')
     first_name: str = models.CharField(max_length=50)
     last_name: str = models.CharField(max_length=50)
     description: str = models.CharField(max_length=2000, null=True, blank=True)
