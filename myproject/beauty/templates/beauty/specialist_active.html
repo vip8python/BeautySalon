@@ -1,13 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title> active </title>
-</head>
-<body>
+{% extends 'beauty/base.html'%}
+{% block content %}
+<title> active </title>
+<h3>Active specialist: </h3>
 {% for spec in specialist %}
-<p1>{{ spec.company }} </p1>
+
+<p1>{{ spec.company }}</p1>
+<br>
 {% endfor %}
 
-</body>
-</html>
+{% endblock %}

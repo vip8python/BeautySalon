@@ -6,7 +6,7 @@ from django.views import generic
 from django.views.decorators.csrf import csrf_protect
 from django.contrib import messages
 from django.views.generic.edit import FormMixin
-from .forms import SpecialistReviewForm, UserUpdateForm, ProfileUpdateForm
+from .forms import SpecialistReviewForm, UserUpdateForm, ProfileUpdateForm, CommentForm
 from django.db.models import Q
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import ListView, DetailView
@@ -46,10 +46,14 @@ class SpecialistDetailView(FormMixin, generic.DetailView):
     template_name = 'beauty/specialist_detail.html'
     form_class = SpecialistReviewForm
 
+    def __init__(self, **kwargs):
+        super().__init__(kwargs)
+        self.object = None
+
     def get_success_url(self):
         return reverse('specialist_detail', kwargs={'pk': self.object.id})
 
-    def post(self, request, *args, **kwargs):
+    def post(self):
         self.object = self.get_object()
         form = self.get_form()
         if form.is_valid():
@@ -157,6 +161,22 @@ def registration(request):
 
 def blog():
     pass
+
+
+def comment(request):
+    if request.method == 'POST':
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            print(form.cleaned_data)
+    else:
+        form = CommentForm()
+
+    data = {
+        'comment': comment,
+        'title': 'comment',
+        'form': form
+    }
+    return render(request, 'beauty/comment.html', data)
 
 
 def page_not_found(request, exception):

@@ -16,7 +16,7 @@ class Client(models.Model):
     phone_number: str = models.CharField(max_length=20)
     register: models.DateField | None = models.DateField(null=True, blank=True, verbose_name='register data')
     email: str = models.EmailField()
-    password: str = models.CharField(max_length=50, default='')
+    password: str = models.CharField(max_length=50, default='1234')
 
     def save(self, *args, **kwargs):
         """
