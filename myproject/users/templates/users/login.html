@@ -1,0 +1,14 @@
+{% extends 'beauty/base.html' %}
+
+{% block content %}
+<h1>Authorization</h1>
+
+<form method="post">
+  {% csrf_token %}
+  <p>{{ form.as_p }}</p>
+  <p>
+    <button type="submit">enter</button>
+  </p>
+</form>
+{% endblock %}
+

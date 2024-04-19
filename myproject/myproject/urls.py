@@ -7,6 +7,7 @@ from beauty.views import page_not_found
 urlpatterns = [
                   path('admin/', admin.site.urls),
                   path('', include('beauty.urls')),
+                  path('users/', include('users.urls', namespace='users')),
                   path('captcha/', include('captcha.urls')),
                   path('accounts/', include('django.contrib.auth.urls')),
                   path('__debug__/', include('debug_toolbar.urls')),

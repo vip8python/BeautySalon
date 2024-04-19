@@ -27,6 +27,7 @@ INSTALLED_APPS = [
     'debug_toolbar',
 
     'beauty.apps.BeautyConfig',
+    'users.apps.UsersConfig',
 ]
 
 MIDDLEWARE = [
