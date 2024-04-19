@@ -103,6 +103,8 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'beauty/media')
 MEDIA_URL = '/media/'
 
 LOGIN_REDIRECT_URL = os.getenv('LOGIN_REDIRECT_URL')
+LOGIN_URL = os.getenv('LOGIN_URL')
+LOGOUT_REDIRECT_URL = os.getenv('LOGOUT_REDIRECT_URL')
 
 EMAIL_BACKEND = os.getenv('EMAIL_BACKEND')
 EMAIL_HOST = os.getenv('EMAIL_HOST')
